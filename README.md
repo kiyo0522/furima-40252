@@ -53,6 +53,11 @@ Things you may want to cover:
 | ------------------ | ---------- | ------------------------------ |
 | title              | string     | null: false                    | 商品名
 | title_description  | text       | null: false                    | 商品説明
+| category_id        | string     | null: false                    | カテゴリ
+| condition_id       | string     | null: false                    | 商品状態
+| shipp_fee_id       | string     | null: false                    | 配送料負担
+| prefecture_idc     | string     | null: false                    | 発送元地域
+| shipp_date_id      | string     | null: false                    | 発送日の目安
 | price              | integer    | null: false                    | 価格
 | user               | references | null: false, foreign_key: true |  
 
