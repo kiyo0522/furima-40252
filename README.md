@@ -38,9 +38,7 @@ Things you may want to cover:
 | first_name         | string   | null: false | 
 | last_name_kana     | string   | null: false | 
 | first_name_kana    | string   | null: false | 
-| birthday_year      | date     | null: false | 
-| birthday_manth     | date     | null: false | 
-| birthday_date      | date     | null: false | 
+| birthday　　　      | date     | null: false | 
 
 
 ### Association
@@ -53,18 +51,10 @@ Things you may want to cover:
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| category           | string     | null: false                    | カテゴリ
 | title              | string     | null: false                    | 商品名
 | title_description  | text       | null: false                    | 商品説明
-| condition          | string     | null: false                    | 商品状態
-| shipp_fee          | string     | null: false                    | 配送料負担
-| shipp_origin       | string     | null: false                    | 配送元地域
-| shipp_date         | string     | null: false                    | 発送日の目安
 | price              | integer    | null: false                    | 価格
-| commission_fee     | integer    | null: false                    | 手数料
-| profit             | integer    | null: false                    | 利益
 | user               | references | null: false, foreign_key: true |  
-| order              | references | null: false, foreign_key: true | 
 
 
 ### Association
@@ -84,6 +74,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :item
+- belongs_to :orders
 - belongs_to :orders_addresses
 
 
@@ -93,15 +84,13 @@ Things you may want to cover:
 | ---------- | ---------- | ------------------------------ |
 | post_code  | string     | null: false                    |
 | prefecture | string     | null: false                    |
-| city       | text       | null: false                    |
+| city       | string     | null: false                    |
 | block      | string     | null: false                    |
-| building   | string     | null: false                    |
+| building   | string     | 　　　　　　                     |
 | phone      | string     | null: false                    |
-| user       | references | null: false, foreign_key: true |
 | order      | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :user
 - has_many   :order
