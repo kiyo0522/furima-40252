@@ -44,7 +44,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_many :orders_addresses
+- has_many :orders
 
 
 ## items テーブル
@@ -98,4 +98,4 @@ Things you may want to cover:
 
 ### Association
 
-- belong_to   :order
+- belongs_to   :order
