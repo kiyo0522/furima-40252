@@ -53,11 +53,11 @@ Things you may want to cover:
 | ------------------ | ---------- | ------------------------------ |
 | title              | string     | null: false                    | 商品名
 | title_description  | text       | null: false                    | 商品説明
-| category_id        | string     | null: false                    | カテゴリ
-| condition_id       | string     | null: false                    | 商品状態
-| shipp_fee_id       | string     | null: false                    | 配送料負担
-| prefecture_id      | string     | null: false                    | 発送元地域
-| shipp_date_id      | string     | null: false                    | 発送日の目安
+| category_id        | integer    | null: false                    | カテゴリ
+| condition_id       | integer    | null: false                    | 商品状態
+| shipp_fee_id       | integer    | null: false                    | 配送料負担
+| prefecture_id      | integer    | null: false                    | 発送元地域
+| shipp_date_id      | integer    | null: false                    | 発送日の目安
 | price              | integer    | null: false                    | 価格
 | user               | references | null: false, foreign_key: true |  
 
@@ -80,7 +80,7 @@ Things you may want to cover:
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :orders_addresses
+- has_one :order_address
 
 
 ## orders_addresses テーブル
@@ -88,7 +88,7 @@ Things you may want to cover:
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
 | post_code      | string     | null: false                    |
-| prefecture_id  | string     | null: false                    |
+| prefecture_id  | integer    | null: false                    |
 | city           | string     | null: false                    |
 | block          | string     | null: false                    |
 | building       | string     | 　　　　　　                     |
@@ -98,5 +98,4 @@ Things you may want to cover:
 
 ### Association
 
-- has_many   :order
-
+- belong_to   :order
