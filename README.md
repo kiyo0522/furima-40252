@@ -29,43 +29,73 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| profile            | text   | null: false |
-| occupation         | text   | null: false |
-| position           | text   | null: false |
+| Column             | Type     | Options     |
+| ------------------ | -------- | ----------- |
+| email              | string   | null: false, unique: true |
+| nickname           | string   | null: false |
+| encrypted_password | string   | null: false |
+| last_name          | string   | null: false | 
+| first_name         | string   | null: false | 
+| last_name_kana     | string   | null: false | 
+| first_name_kana    | string   | null: false | 
+| birthday　　　      | date     | null: false | 
+
 
 ### Association
 
-- has_many :prototypes
-- has_many :comments
+- has_many :items
+- has_many :orders
 
-## prototypes テーブル
+
+## items テーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| title              | string     | null: false                    | 商品名
+| title_description  | text       | null: false                    | 商品説明
+| category_id        | integer    | null: false                    | カテゴリ
+| condition_id       | integer    | null: false                    | 商品状態
+| shipp_fee_id       | integer    | null: false                    | 配送料負担
+| prefecture_id      | integer    | null: false                    | 発送元地域
+| shipp_date_id      | integer    | null: false                    | 発送日の目安
+| price              | integer    | null: false                    | 価格
+| user               | references | null: false, foreign_key: true |  
+
+
+### Association
+
+- belongs_to :user
+- has_one    :order
+
+
+## orders テーブル
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
-| title      | string     | null: false                    |
-| catch_copy | text       | null: false                    |
-| concept    | text       | null: false                    |
-| user       | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |  
+| item       | references | null: false, foreign_key: true | 
+
 
 ### Association
 
 - belongs_to :user
-- has_many :comments
+- belongs_to :item
+- has_one :order_address
 
-## comments テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| content   | text       | null: false                    |
-| prototype | references | null: false, foreign_key: true |
-| user      | references | null: false, foreign_key: true |
+## orders_addresses テーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| post_code      | string     | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| city           | string     | null: false                    |
+| block          | string     | null: false                    |
+| building       | string     | 　　　　　　                     |
+| phone          | string     | null: false                    |
+| order          | references | null: false, foreign_key: true |
+
 
 ### Association
 
-- belongs_to :user
-- belongs_to :prototype
+- belongs_to   :order
