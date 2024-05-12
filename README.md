@@ -31,8 +31,8 @@ Things you may want to cover:
 
 | Column             | Type     | Options     |
 | ------------------ | -------- | ----------- |
-| nickname           | string   | null: false |
 | email              | string   | null: false, unique: true |
+| nickname           | string   | null: false |
 | encrypted_password | string   | null: false |
 | last_name          | string   | null: false | 
 | first_name         | string   | null: false | 
@@ -56,7 +56,7 @@ Things you may want to cover:
 | category_id        | string     | null: false                    | カテゴリ
 | condition_id       | string     | null: false                    | 商品状態
 | shipp_fee_id       | string     | null: false                    | 配送料負担
-| prefecture_idc     | string     | null: false                    | 発送元地域
+| prefecture_id      | string     | null: false                    | 発送元地域
 | shipp_date_id      | string     | null: false                    | 発送日の目安
 | price              | integer    | null: false                    | 価格
 | user               | references | null: false, foreign_key: true |  
@@ -78,22 +78,22 @@ Things you may want to cover:
 
 ### Association
 
+- belongs_to :user
 - belongs_to :item
-- belongs_to :orders
 - belongs_to :orders_addresses
 
 
 ## orders_addresses テーブル
 
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| post_code  | string     | null: false                    |
-| prefecture | string     | null: false                    |
-| city       | string     | null: false                    |
-| block      | string     | null: false                    |
-| building   | string     | 　　　　　　                     |
-| phone      | string     | null: false                    |
-| order      | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| post_code      | string     | null: false                    |
+| prefecture_id  | string     | null: false                    |
+| city           | string     | null: false                    |
+| block          | string     | null: false                    |
+| building       | string     | 　　　　　　                     |
+| phone          | string     | null: false                    |
+| order          | references | null: false, foreign_key: true |
 
 
 ### Association
