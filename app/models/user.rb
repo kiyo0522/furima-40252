@@ -10,7 +10,7 @@ class
   validates :last_name_kana, :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/u, message: 'は全角カタカナで入力してください' }
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'は半角英数字混合で入力してください' }
   has_many  :items
-  has_many  :orders
+  # has_many  :orders
 end
 
 # メールアドレスは@を含む必要がある

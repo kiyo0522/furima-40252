@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
-    @items = Item.includes(:user) # アクティブハッシュのデータを別途取得しない
+    # @items = Item.includes(:user) # アクティブハッシュのデータを別途取得しない
   end
 
   def new

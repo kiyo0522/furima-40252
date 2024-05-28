@@ -8,9 +8,8 @@ function priceCalculator() {
       const price = parseInt(priceInput.value,10);
       console.log("入力された価格:", price); // デバッグ用
   if (!isNaN(price) && price >= 300 && price <= 9999999) {
-    const fee = Math.floor(price * 0.1); // 販売手数料を計算
-    console.log("OK");
-    const profitAmount = price - fee; // 販売利益を計算
+    const fee = Math.floor(price * 0.1);          // 販売手数料を小数切捨で表示
+    const profitAmount = Math.floor(price - fee); // 販売利益を小数切捨で表示
     // 計算結果を表示
     taxPrice.innerText = fee.toLocaleString();
     profit.innerText = profitAmount.toLocaleString();

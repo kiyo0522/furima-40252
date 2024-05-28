@@ -13,6 +13,12 @@ RSpec.describe Item, type: :model do
       end
     end
     context '出品登録できないとき' do
+      it 'item.userが空だとuserと紐づいていないため保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
+      end
+
       it '画像が１枚ないと出品できない' do
         @item.image = nil
         @item.valid?
