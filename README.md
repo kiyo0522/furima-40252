@@ -68,6 +68,14 @@ Things you may want to cover:
 - has_one    :order
 
 
+#### ActiveHash::Associations
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :shipping_fee
+  belongs_to :prefecture
+  belongs_to :shipping_date
+
+
 ## orders テーブル
 
 | Column     | Type       | Options                        |

@@ -83,3 +83,6 @@ group :production do
 end
 
 gem 'devise'
+gem 'mini_magick' # Gemfileの一番下に記述する
+gem 'image_processing', '~> 1.2'
+gem 'active_hash'
