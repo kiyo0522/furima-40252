@@ -126,8 +126,8 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-      <% if @items.present? %> <!--　商品のリストが存在しているか確認 <% @items.each do |item| %> -->
-        <%= link_to "#" do %>
+      <% if @items.present? %> <!--　商品のリストが存在しているか確認 -->
+         <% @items.each do |item| %>
           <li class='list'>
             <%= link_to item_path(item) do %> <!-- item を item_path に渡す -->
               <div class='item-img-content'>
@@ -160,7 +160,6 @@
             </div>
           </li>
         <% end %>
-      <% end %>
       <% else %>
           
           <%# 商品がない場合は以下のダミー商品を表示 %>
@@ -183,7 +182,7 @@
         </li>
     </ul>
   </div>
-      <%# <% end %>
+  <% end %>
   <%# /商品一覧 %>
 </div>
   <%= link_to( new_item_path, data: { turbo: false },class: 'purchase-btn') do %>
@@ -191,4 +190,3 @@
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
   <% end %>
   <%= render "shared/footer" %>
-  <% end %>
