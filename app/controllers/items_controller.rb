@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]  # ログインしていることを確認
   before_action :contributor_confirmation, only: [:edit, :update] # 現在のユーザーとアイテム投稿者が一致していることを確認
 
@@ -20,15 +21,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id]) # 編集したいレコードを取得
+    #@item = Item.find(params[:id]) # 編集したいレコードを取得
     if @item.update(item_params)# 取得したレコードをupdateメソッドで更新
       redirect_to item_path(@item)
     else
@@ -37,7 +36,6 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    # @item = Item.find(params[:id]) 
     # if @item.destroy
     #   redirect_to root_path
     # else
@@ -60,8 +58,11 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
-  def contributor_confirmation
+  def set_item
     @item = Item.find(params[:id])
+   end
+
+  def contributor_confirmation
     redirect_to root_path unless current_user == @item.user
   end
 end
