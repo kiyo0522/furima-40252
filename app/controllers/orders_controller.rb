@@ -59,6 +59,7 @@ class OrdersController < ApplicationController
   end
 end
 
+  # 学習用とし記録しております
     # params.require(:order_form).permit(:post_code, :prefecture_id, :city, :block, :building,
     # :phone, :number, :exp_month, :exp_year, :cvc, :token).merge(user_id: current_user.id, item_id: params[:item_id])
     # params.require(:order_form).permit(:post_code, :prefecture_id, :city, :block, :building,
