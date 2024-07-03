@@ -136,14 +136,15 @@
                 <% else %>
                   <%= image_tag "default-image.png", class: "item-img" %> <!-- 画像がない場合にデフォルト画像を表示 -->
                 <% end %>
-                <%# 商品が売れていればsold outを表示しましょう %>
-                  <%# <%= if @item.order.present?     2つのテーブルに存在一致していたらが良いか%>
-                  <%# <% if item.sold_out? %> <!-- 商品が売り切れかどうかを確認 -->
-                  <%# <div class='sold-out'> %>
-                  <%# <span>Sold Out!!</span> %>
-                  <%# </div> %>
-                  <%# <% end %> <!-- if ブロックを終了 -->
-                  <%# //商品が売れていればsold outを表示しましょう %>
+                <!-- 商品が売れていればsold outを表示 -->
+                  <% if item.order.present? %> <!-- itemに関するorderが存在しないか確認（未購入の場合） -->
+                  <%# <% if item.sold_out? %>        <!-- 商品が売り切れかどうかを確認 -->
+                  <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                  </div>
+                  <% end %>
+                <!-- 商品が売れていればsold outを表示 -->
+            
               </div>
             <% end %>
             <div class='item-info'>
