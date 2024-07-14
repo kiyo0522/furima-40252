@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show] # ログインしていることを確認
   before_action :contributor_confirmation, only: [:edit, :update, :destroy] # 現在のユーザーとアイテム投稿者が一致していることを確認
+  before_action :redirect_if_sold, only: [:edit, :update] # 売却済みを確認
 
   def index
     @items = Item.includes(:user).order(created_at: :desc) # 新着順にソート
@@ -24,6 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
@@ -64,5 +66,11 @@ class ItemsController < ApplicationController
 
   def contributor_confirmation
     redirect_to root_path unless current_user == @item.user
+  end
+
+  def redirect_if_sold
+    if @item.order.present?
+      redirect_to root_path, alert: 'この商品は既に売却されています'
+    end
   end
 end

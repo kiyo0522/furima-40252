@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    @order_form = FactoryBot.build(:order_form)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @order_form = FactoryBot.build(:order_form, user_id: user.id, item_id: item.id)
   end
 
   describe '商品購入機能の保存' do
@@ -10,11 +12,16 @@ RSpec.describe OrderForm, type: :model do
       it '全ての属性が正しく入力されていれば登録できる' do
         expect(@order_form).to be_valid
       end
+
+      it '建物名は空でも登録できる' do
+        @order_form.building = ''
+        expect(@order_form).to be_valid
+      end
     end
 
     context '購入登録できないとき' do
       it 'user_idが空では登録できない' do
-        @order_form.user_id = nil
+        @order_form.user_id = nil # user_id を nil にする
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("User can't be blank")
       end
@@ -49,15 +56,13 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include("Block can't be blank")
       end
 
-      it '建物名は空でも登録できる' do
-        @order_form.building = ''
-        expect(@order_form).to be_valid
-      end
-
-      it '電話番号が11桁を超えまたはハイフンがあると登録できない' do
+      it '電話番号が12桁以上だと登録できない' do
         @order_form.phone = '090123456789'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Phone は10桁以上11桁以内の半角数値で入力してください')
+      end
+
+      it '電話番号にハイフンが含まれていると登録できない' do
         @order_form.phone = '090-1234-5678'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Phone は10桁以上11桁以内の半角数値で入力してください')
@@ -77,3 +82,36 @@ RSpec.describe OrderForm, type: :model do
     end
   end
 end
+
+# 学習用とし記録しております
+# it '建物名は空でも登録できる' ＃ は正常系で記述すること
+#   @order_form.building = ''
+#   expect(@order_form).to be_valid
+# end
+
+# 学習用とし記録しております
+# 保存してからIDを付与するためbuildでは保存されないためcreateで保存してから取得する
+# 今回インスタンスで使用しないため＠は使用しない(使用することもできるが今回は必要がないため)
+# undefined local variable or method `user' fo名前不一致のエラー@user.idを使用するならば、＠user.idを使用するべき
+  
+# before do
+#   user = FactoryBot.build(:user)
+#   item = FactoryBot.build(:item)
+#   @order_form = FactoryBot.build(:order_form, user_id: user.id, item_id: item.id)
+# end
+
+# before do	before do
+#   @user = FactoryBot.create(:user)
+#   @item = FactoryBot.create(:item)
+#   @order_form = FactoryBot.build(:order_form, user: @user, item: @item)
+# end
+
+# 学習用（テスト毎に分けること！）
+# it '電話番号が11桁を超えまたはハイフンがあると登録できない' do
+#   @order_form.phone = '090123456789'
+#   @order_form.valid?
+#   expect(@order_form.errors.full_messages).to include('Phone は10桁以上11桁以内の半角数値で入力してください')
+#   @order_form.phone = '090-1234-5678'
+#   @order_form.valid?
+#   expect(@order_form.errors.full_messages).to include('Phone は10桁以上11桁以内の半角数値で入力してください')
+# end

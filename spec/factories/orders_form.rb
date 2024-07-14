@@ -6,8 +6,8 @@ FactoryBot.define do
     block                { '1-1-1' }
     building             { 'ディアレイシャス101' }
     phone                { '0901234567' }
-    user_id              {  1  }
-    item_id              {  1  }
     token                { 'tok_abcdefghijk00000000000000000' }
+    user_id              { Faker::Number.non_zero_digit }
+    item_id              { Faker::Number.non_zero_digit }
   end
 end
