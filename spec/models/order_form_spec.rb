@@ -38,6 +38,12 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
 
+      it '郵便番号が空では登録できない' do
+        @order_form. post_code = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Post code can't be blank")
+      end
+
       it '都道府県が1「---」、またはブランクでは登録できない' do
         @order_form.prefecture_id = 1
         @order_form.valid?
@@ -54,6 +60,12 @@ RSpec.describe OrderForm, type: :model do
         @order_form.block = nil
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Block can't be blank")
+      end
+
+      it '電話番号が空では登録できない' do
+        @order_form.phone = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone can't be blank")
       end
 
       it '電話番号が12桁以上だと登録できない' do
